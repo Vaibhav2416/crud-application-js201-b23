@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 100%;
+            border: 1px solid red;
+            height: 150vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        #container>div{
+            border: 1px solid green;
+            height: 320px;
+            width: 22%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          
+        }
+        img{
+            width: 150px;
+            height: 100px;
+        }
+    </style>
+    
+</head>
+<body>
+    <h2>CRUD Application</h3>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+<script>
+   let container=document.getElementById("container")
+
+//    read
+// let allData=[]
+ async function getData(){
+    try {
+        let resp=await fetch("http://localhost:3000/posts",{
+            method:"GET"
+        })
+        let data=await resp.json()
+        // console.log(data)
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+ }
+
+
+//  getData()
+
+
+ function makeCards(data){
+    return `
+             <div>
+                <h2>Name:${data.name}</h2>
+                <img src="${data.avtaar}" alt="">
+                <p>Roll No:${data.rollNo}</p>
+                <h3>${data.course}</h3>
+                <button id="deletebutton" onClick="deleteFunction(${data.id})">Delete</button>
+            
+                <button id="updateButn" onClick="updateFunction(${data.id})">Update</button>
+                </div>
+         `
+ }
+ 
+
+async function getCards(){
+    let data=await getData()
+    console.log(data)
+
+    container.innerHTML=data.map((item)=>{
+             return  makeCards(item)
+    }).join("")
+
+ }
+
+ getCards()
+
+
+//  delete
+
+async function deleteFunction(id){
+    let resp=await fetch(`http://localhost:3000/posts/${id}`,{
+        method:"DELETE"
+    })
+    let data=await resp.json()
+} 
+
+
+// PUT
+
+let obj={
+    "name":"Nihal",
+    "avtaar":"https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772242__480.jpg",
+    "rollNo":"3",
+    "course":"Unit-1"
+}
+
+async function updateFunction(id){
+    let resp=await fetch(`http://localhost:3000/posts/${id}`,{
+        method:"PUT",
+        body:JSON.stringify(obj),
+        headers:{'Content-Type': 'application/json'}
+    })
+    let data=await resp.json()
+}
+
+
+
+</script>

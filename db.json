@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "name": "Nihal",
+      "avtaar": "https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772242__480.jpg",
+      "rollNo": "3",
+      "course": "Unit-1",
+      "id": 2
+    },
+    {
+      "name": "Sourav",
+      "avtaar": "https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772242__480.jpg",
+      "rollNo": "5",
+      "course": "JAVA",
+      "id": 3
+    },
+    {
+      "name": "Trupti",
+      "avtaar": "https://cdn.pixabay.com/photo/2016/10/26/19/00/domain-names-1772242__480.jpg",
+      "rollNo": "12",
+      "course": "MERN",
+      "id": 5
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
